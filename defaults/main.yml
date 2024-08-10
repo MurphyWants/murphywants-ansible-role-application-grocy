@@ -1,1 +1,14 @@
-# variable: True
+# variable: True---
+GROCY_PUID: 10004 # TODO
+GROCY_PGID: 10004 # TODO
+GROCY_HTTP_PORT: 8085 # TODO
+GROCY_PATH: '/mnt/grocy/'
+GROCY_STORAGE_ZFS_POOL: 'apps_pool'
+GROCY_STORAGE_ZFS_FS: 'grocy'
+GROCY_TIMEZONE: "America/New_York"
+GROCY_PODMAN_SERVICE_ACCOUNT: 'srv_grocy'
+GROCY_CONTAINER_VERSION: 'latest'
+GROCY_FQDN: 'grocy.local'
+# undefined variables
+# GROCY_SSL_CERT_PATH: path to cert
+# GROCY_SSL_KEY_PATH: path to key

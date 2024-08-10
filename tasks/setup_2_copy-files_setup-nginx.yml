@@ -1,0 +1,48 @@
+---
+  - name: Create folders
+    ansible.builtin.file:
+      path: "{{ item }}"
+      state: directory
+    loop:
+      - "{{ GROCY_PATH }}"
+      - "{{ GROCY_PATH }}/volumes"
+      - "{{ GROCY_PATH }}/volumes/config"
+      - "{{ GROCY_PATH }}/backups"
+      - "{{ GROCY_PATH }}/backups/database"
+      - "{{ GROCY_PATH }}/backups/tarballs"
+      - "{{ GROCY_PATH }}/backups/logs"
+      - "{{ GROCY_PATH }}/scripts"
+      - "{{ GROCY_PATH }}/docs"
+
+
+  - name: Copy docker compose file
+    ansible.builtin.template:
+      src: "{{ role_path }}/templates/GROCY_docker-compose.yml.j2"
+      dest: "{{ GROCY_PATH }}/docs/docker-compose.yml"
+
+  - name: Install nginx
+    ansible.builtin.package:
+      name: nginx
+      state: 'latest'
+
+  - name: Install sqlite3
+    ansible.builtin.package:
+      name: sqlite3
+
+  #- name: Copy dump database scripts
+  #  ansible.builtin.template:
+  #    src: "{{ role_path }}/templates/backup_grocy.sh.j2"
+  #    dest: "{{ GROCY_PATH }}/scripts/backup_grocy.sh"
+  #    mode: "0700"
+#
+  #- name: Create cronjob to run database dump script daily at 10pm
+  #  ansible.builtin.cron:
+  #    backup: true
+  #    hour: 22
+  #    minute: 0
+  #    job: "bash {{ GROCY_PATH }}/scripts/backup_grocy.sh -n 30"
+  #    name: "grocy - Dump Databases"
+  #    state: "present"
+      
+# TODO If selinux, flip selinux booleans
+

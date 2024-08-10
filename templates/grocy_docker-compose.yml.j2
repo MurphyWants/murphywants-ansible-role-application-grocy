@@ -1,0 +1,14 @@
+VERSION: '3.3'
+services:
+  grocy:
+    image: 'lscr.io/linuxserver/grocy:{{ GROCY_CONTAINER_VERSION }}'
+    container_name: grocy
+    environment:
+      - PUID={{ GROCY_PUID }}
+      - PGID={{ GROCY_PGID }}
+      - TZ="{{ GROCY_TIMEZONE }}"
+    volumes:
+      - '{{ GROCY_PATH }}:/config:z'
+    ports:
+      - '127.0.0.1:{{ GROCY_HTTP_PORT }}:80/tcp'
+    restart: unless-stopped
