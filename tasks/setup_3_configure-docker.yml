@@ -1,7 +1,7 @@
 ---
   - name: Start grocy
-    community.docker.docker_compose:
+    community.docker.docker_compose_v2:
       project_src: "{{ GROCY_PATH }}/docs"
       files: "docker-compose.yml"
-      pull: true
+      pull: always
 
